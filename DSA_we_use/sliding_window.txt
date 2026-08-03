@@ -1,0 +1,46 @@
+# Sliding Window Overlap - HAC (Simple Explanation)
+
+The purpose of the Sliding Window Overlap is to preserve context between consecutive chunks. After the Greedy Chunk Builder creates logical chunks, important information may be split across chunk boundaries. If the retrieval engine only finds one chunk, it may miss the beginning or ending of the answer.
+
+The `_apply_overlap()` function solves this problem by copying a small portion of the previous chunk into the beginning of the current chunk.
+
+First, the function creates an empty list called `overlapped_chunks`. This list will store the final chunks after overlap has been applied. We do not modify the original list because keeping the original data unchanged is a good software engineering practice.
+
+Next, the function loops through every chunk using `for i in range(len(chunks))`. We use the index because every chunk needs access to its previous chunk. A normal `for chunk in chunks` loop cannot directly access the previous chunk.
+
+When `i == 0`, we are processing the first chunk. Since there is no previous chunk, no overlap can be added. Therefore, the first chunk is copied directly into the result list.
+
+For every remaining chunk, the function stores the previous chunk in `previous_chunk` and the current chunk in `current_chunk`.
+
+It then calls `_get_overlap_paragraphs(previous_chunk, overlap)` to collect the last few paragraphs from the previous chunk. These paragraphs contain the context that should be preserved.
+
+The returned paragraphs are stored as a list, so they are joined into one string using `"\n\n".join(overlap_paragraphs)`.
+
+Finally, the overlap text is placed before the current chunk using:
+
+`overlap_text + "\n\n" + current_chunk`
+
+The new chunk now contains both the previous context and the new content. This new chunk is added to `overlapped_chunks`.
+
+After every chunk has been processed, the function returns the completed `overlapped_chunks` list.
+
+The algorithm visits each chunk only once, giving it a **Time Complexity of O(n)**, where **n** is the number of chunks. The extra memory used is also **O(n)** because a new list of overlapped chunks is created.
+
+This function does not decide **what** should overlap. That responsibility belongs to `_get_overlap_paragraphs()`. The responsibility of `_apply_overlap()` is simply to **apply** the selected overlap to the next chunk. Separating these responsibilities makes the code modular, easier to maintain, and follows the **Single Responsibility Principle (SRP)** used in enterprise software development.
+
+---
+
+# Interview Answer
+
+**Interviewer:** *Why did you implement Sliding Window Overlap in HAC?*
+
+**Answer:**
+
+> "The purpose of the Sliding Window Overlap is to preserve context between consecutive chunks.
+ During chunking, an important sentence or idea may be divided between two chunks.
+If the retrieval engine returns only one chunk, part of the information could be missing. 
+To solve this, I copy the ending paragraphs from the previous chunk and prepend them to the current chunk. 
+I first identify the overlap using a helper function called `_get_overlap_paragraphs()`, and then `_apply_overlap()` inserts those paragraphs into the next chunk. 
+I separated these responsibilities to follow the Single Responsibility Principle. 
+The algorithm processes each chunk only once, resulting in **O(n)** time complexity, 
+while significantly improving retrieval quality by preserving context across chunk boundaries."

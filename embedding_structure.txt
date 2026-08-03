@@ -1,0 +1,67 @@
+                Cognexa V1
+
+          ┌──────────────────┐
+          │ Upload Document  │
+          └────────┬─────────┘
+                   │
+                   ▼
+         Text Extraction Service
+                   │
+                   ▼
+         Text Cleaning Service
+                   │
+                   ▼
+      HAC (Helix Adaptive Chunking)
+                   │
+        ┌──────────┴──────────┐
+        ▼                     ▼
+   MySQL Chunks          Embedding Service
+                                │
+                                ▼
+                         384-D Vector
+                                │
+                                ▼
+                      Qdrant Vector Store
+
+
+
+
+                  Structure-2
+
+
+                DOCUMENT
+                    │
+                    ▼
+                   HAC
+                    │
+             ~800-token chunks
+                    │
+                    ▼
+                Embeddings
+                    │
+                    ▼
+                  Qdrant
+                    │
+                    │
+USER QUERY ────────▼
+                   HARE
+                    │
+              Top-K = 5
+                    │
+                    ▼
+          ContextBuilderService
+                    │
+        ┌───────────┼───────────┐
+        │           │           │
+    Duplicate    Ranking    Token Budget
+    Prevention   Preserve    ≤ 2,500
+        │           │           │
+        └───────────┼───────────┘
+                    ▼
+             Final Context
+                    │
+                    ▼
+              Prompt Builder
+                    │
+                    ▼
+                   LLM

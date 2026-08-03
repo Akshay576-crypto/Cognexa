@@ -1,0 +1,8 @@
+Context sufficient?
+       │
+   ┌───┴───┐
+  YES      NO
+   ↓        ↓
+LLM      fallback.txt
+   ↓        ↓
+Answer   Safe response

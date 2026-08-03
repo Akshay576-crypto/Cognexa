@@ -1,0 +1,72 @@
+# FastAPI
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+pymysql
+alembic
+
+# Validation
+pydantic
+pydantic-settings
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+
+# Environment
+python-dotenv
+
+# HTTP
+httpx
+requests
+
+# AI
+langchain
+langgraph
+langchain-community
+langchain-qdrant
+langchain-ollama
+
+# Vector DB
+qdrant-client
+
+# Embeddings & ML
+numpy
+pandas
+scikit-learn
+
+# PDF & Documents
+pymupdf
+python-docx
+openpyxl
+markdown
+
+# Report Generation
+reportlab
+python-pptx
+
+# Charts
+matplotlib
+plotly
+
+# Background Tasks
+apscheduler
+
+# Logging
+loguru
+
+# Utilities
+orjson
+tenacity
+tqdm
+
+# Testing
+pytest
+
+# Code Quality
+black
+isort
+flake8

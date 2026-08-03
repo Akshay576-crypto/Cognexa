@@ -1,0 +1,42 @@
+                 COGNEXA / PROJECT HELIX
+                           │
+             ┌─────────────┴─────────────┐
+             │                           │
+       INTERNAL KNOWLEDGE          EXTERNAL KNOWLEDGE
+             │                           │
+            HARE                    Real-Time Tools
+             │                     │     │      │
+        Qdrant Docs              Web  Wikipedia Yahoo Finance
+             │                     │     │      │
+             └──────────────┬──────┴─────┴──────┘
+                            │
+                       LangGraph
+                            │
+                     Research Agent
+                            │
+                    Analysis / Consulting
+
+
+                        USER
+                         │
+                         ▼
+                  Query Analyzer
+                         │
+              ┌──────────┼──────────┐
+              ▼          ▼          ▼
+           Internal   External    Financial
+            Docs       Web        Markets
+              │          │          │
+             HARE       Web       Yahoo Finance
+              │          │          │
+              └──────────┼──────────┘
+                         ▼
+                  Evidence State
+                         │
+                         ▼
+                     LLM Analysis
+                         │
+                  ┌──────┴──────┐
+                  ▼             ▼
+              Research      Consulting
+                Answer        Advice

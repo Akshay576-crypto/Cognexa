@@ -1,0 +1,21 @@
+                 COGNEXA DSA
+
+                    HAC
+                     │
+             ┌───────┴───────┐
+             ↓               ↓
+         Greedy         Sliding Window
+             │               │
+             └───────┬───────┘
+                     ↓
+                    HARE
+                     │
+        ┌────────────┼────────────┐
+        ↓            ↓            ↓
+     Filtering     Top-K       Ranking
+                     │
+                     ↓
+                Context Builder
+                     │
+                     ↓
+               Hash Set/Map

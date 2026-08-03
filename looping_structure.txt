@@ -1,0 +1,27 @@
+                    LangGraph
+                       │
+                       ▼
+                 ┌───────────┐
+                 │   Query   │
+                 │ Analysis  │
+                 └─────┬─────┘
+                       ↓
+                     HARE
+                       ↓
+                Context Builder
+                       ↓
+                    Prompt
+                       ↓
+                  LangChain
+                       ↓
+                     LLM
+                       ↓
+                Answer Checker
+                       │
+                 ┌─────┴─────┐
+                 ↓           ↓
+               Good        Weak
+                 ↓           ↓
+              Answer      Loop
+                             │
+                             └────→ HARE

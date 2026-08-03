@@ -1,0 +1,42 @@
+OmniMind/
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── agents/
+│   │   ├── analytics/
+│   │   ├── auth/
+│   │   ├── config/
+│   │   ├── core/
+│   │   ├── database/
+│   │   ├── exports/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── prompts/
+│   │   ├── rag/
+│   │   ├── repositories/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   ├── tools/
+│   │   ├── utils/
+│   │   └── main.py
+│   │
+│   ├── tests/
+│   ├── logs/
+│   ├── data/
+│   ├── requirements.txt
+│   └── .env
+│
+├── frontend/
+│
+├── docker/
+│
+├── docs/
+│
+├── scripts/
+│
+├── README.md
+│
+├── docker-compose.yml
+│
+└── .gitignore

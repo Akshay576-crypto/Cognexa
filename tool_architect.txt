@@ -1,0 +1,22 @@
+                         PROJECT HELIX
+                              │
+              ┌───────────────┴────────────────┐
+              │                                │
+       RESEARCH AGENT                   CONSULTING AGENT
+              │                                │
+       ┌──────┴──────┐                  ┌──────┴──────────┐
+       │             │                  │        │        │
+      HARE       Document              HARE     SQL   Calculator
+      Tool        Tool                 Tool     Tool      Tool
+       │             │                  │        │        │
+       └──────┬──────┘                  └──────┼────────┘
+              │                                │
+              └──────────────┬─────────────────┘
+                             ↓
+                         LangGraph
+                             ↓
+                         LLM Service
+                             ↓
+                          LangChain
+                             ↓
+                           Ollama

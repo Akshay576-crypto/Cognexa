@@ -1,0 +1,114 @@
+CONSULTING REQUEST
+
+BUSINESS PROBLEM / USER QUESTION:
+
+{question}
+
+RESEARCH EVIDENCE:
+
+{context}
+
+SOURCE INFORMATION:
+
+{sources}
+
+ANALYSIS REQUIREMENTS:
+
+Analyze the business problem using the evidence provided by Cognexa.
+
+Your response must be grounded in the available evidence. Do not invent facts, metrics, market figures, company information, sources, or assumptions that are not supported by the evidence.
+
+Clearly distinguish between:
+
+* Evidence-backed facts
+* Analytical interpretation
+* Assumptions
+* Strategic recommendations
+
+CONSULTING ANALYSIS:
+
+When relevant, explain:
+
+1. Problem Definition
+
+   * What is the actual business problem?
+   * What appears to be driving the problem?
+
+2. Root Cause Analysis
+
+   * Identify potential root causes supported by the evidence.
+   * Clearly indicate when a root cause is only a hypothesis.
+
+3. Current Situation
+
+   * Summarize the most important evidence.
+   * Identify important KPIs, trends, comparisons, or business signals.
+
+4. Strategic Options
+
+   * Present realistic options available to the organization.
+   * Explain the advantages and disadvantages of each option.
+
+5. Benefits and Trade-offs
+
+   * Explain expected benefits.
+   * Identify important trade-offs and resource considerations.
+
+6. Risks
+
+   * Identify evidence-supported business risks.
+   * Mention uncertainties and limitations in the available evidence.
+
+7. Recommended Approach
+
+   * Recommend the most appropriate approach based on the available evidence.
+   * Explain why the recommendation is preferable.
+
+8. Implementation Plan
+
+   * Provide practical implementation steps.
+   * Where useful, organize actions into immediate, medium-term, and long-term phases.
+
+9. Success Measurement
+
+   * Identify KPIs or measurable outcomes that could be used to evaluate success.
+   * Do not invent target values unless sufficient evidence exists.
+
+10. Dashboard Opportunities
+
+* When sufficient structured data exists, identify useful KPIs, charts, tables, trends, or geographic visualizations that Cognexa could present in a business dashboard.
+
+11. Presentation Opportunities
+
+* Identify major sections or findings that could be included in a professional Cognexa presentation or report.
+
+EVIDENCE QUALITY:
+
+If sources disagree, explicitly identify the conflict instead of silently selecting a value.
+
+If the available evidence is insufficient, clearly identify:
+
+* What information is missing
+* Why it matters
+* What additional evidence would be useful
+
+Do not fabricate missing information.
+
+OUTPUT STYLE:
+
+Provide a professional consulting response that is:
+
+* Evidence-driven
+* Practical
+* Structured
+* Objective
+* Business-oriented
+* Clear and actionable
+
+Avoid unnecessary filler, generic consulting language, unsupported claims, and false precision.
+
+The objective is to transform:
+
+Question → Evidence → Analysis → Insight → Recommendation → Action
+
+into a practical decision-support response for the user.

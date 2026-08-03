@@ -1,0 +1,5 @@
+The available retrieved context does not contain enough reliable information to answer this question.
+
+Do not invent an answer.
+
+Explain briefly that additional information or a broader retrieval result is required.

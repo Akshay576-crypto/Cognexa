@@ -1,0 +1,48 @@
+                 User Uploads PDF
+                         │
+                         ▼
+                 Text Extraction
+                         │
+                         ▼
+                  Text Cleaning
+                         │
+                         ▼
+                 HAC Processing
+         ┌──────────────────────────────┐
+         │ Regex                        │
+         │ Recursive Splitting          │
+         │ Two Pointers                 │
+         │ Greedy                       │
+         │ Sliding Window               │
+         │ Token Counting               │
+         └──────────────────────────────┘
+                         │
+                         ▼
+               MySQL + Embeddings
+                         │
+                         ▼
+                      Qdrant
+                         │
+                         ▼
+                User Asks Question
+                         │
+                         ▼
+                 HARE Processing
+         ┌──────────────────────────────┐
+         │ Similarity Search            │
+         │ Metadata Filtering           │
+         │ Heap (Top-K)                 │
+         │ Sorting                      │
+         │ Re-ranking                   │
+         │ Context Builder              │
+         └──────────────────────────────┘
+                         │
+                         ▼
+                 Project Helix LLM
+                         │
+                         ▼
+                   Final Answer
+
+
+                   HAC Stands for Helix Adaptive Chunking 
+                   HARE stands for Helix Adaptive Retrival Engine

@@ -1,0 +1,478 @@
+# Cognexa Internal Architecture
+
+# HAC (Helix Adaptive Chunking)
+
+## Overview
+
+Helix Adaptive Chunking (HAC) is Cognexa's intelligent document chunking engine. Its purpose is to transform large, unstructured documents into logically organized chunks while preserving the natural structure of the document.
+
+Unlike traditional chunking approaches that split text after a fixed number of characters or tokens, HAC attempts to preserve semantic boundaries such as sections and paragraphs before applying size constraints.
+
+The primary objective of HAC is to improve retrieval quality by ensuring that each chunk contains complete thoughts instead of fragmented text.
+
+---
+
+# Why HAC Exists
+
+Large Language Models cannot process extremely large documents efficiently.
+
+Instead of sending an entire document to the model, the document must first be divided into smaller pieces called chunks.
+
+The quality of these chunks directly affects the quality of Retrieval-Augmented Generation (RAG).
+
+Poor chunking results in:
+
+* Broken sentences
+* Lost context
+* Lower retrieval accuracy
+* Incorrect AI responses
+* Higher hallucination rates
+
+HAC was designed to solve these problems.
+
+---
+
+# HAC Pipeline
+
+Document
+
+↓
+
+Text Extraction
+
+↓
+
+Text Cleaning
+
+↓
+
+Section Detection
+
+↓
+
+Paragraph Detection
+
+↓
+
+Token Estimation
+
+↓
+
+Greedy Chunk Builder
+
+↓
+
+Sliding Window Overlap
+
+↓
+
+Chunk Metadata Generation
+
+↓
+
+Chunk Storage
+
+↓
+
+Embedding Generation
+
+↓
+
+Vector Database
+
+---
+
+# HAC Components
+
+## 1. Text Extraction
+
+Extracts text from uploaded documents such as:
+
+* PDF
+* DOCX
+* TXT
+
+Output:
+
+Raw document text.
+
+---
+
+## 2. Text Cleaning
+
+Normalizes the extracted text.
+
+Responsibilities include:
+
+* Removing unnecessary spaces
+* Removing empty lines
+* Normalizing newline characters
+* Cleaning formatting artifacts
+* Preparing text for chunking
+
+---
+
+## 3. Section Detection
+
+Identifies major document sections.
+
+Examples:
+
+Introduction
+
+Methodology
+
+Results
+
+Conclusion
+
+This preserves high-level document structure.
+
+---
+
+## 4. Paragraph Detection
+
+Each section is divided into logical paragraphs.
+
+HAC never begins chunk construction directly from raw text.
+
+Instead, it operates on meaningful paragraphs.
+
+This significantly improves semantic preservation.
+
+---
+
+## 5. Token Estimation
+
+Each paragraph is analyzed to estimate its size.
+
+Current HAC v1 uses whitespace-based token estimation.
+
+Future versions may integrate tokenizer-aware counting.
+
+---
+
+## 6. Greedy Chunk Builder
+
+This is the core algorithm of HAC.
+
+The engine continuously adds paragraphs into the current chunk.
+
+If adding another paragraph would exceed the configured chunk size, the current chunk is finalized and a new chunk is created.
+
+Rules:
+
+* Preserve paragraph boundaries.
+* Maximize chunk utilization.
+* Never exceed target size.
+
+---
+
+## 7. Sliding Window Overlap
+
+Adjacent chunks share a configurable overlap.
+
+Example:
+
+Chunk 1
+
+Paragraph 1
+
+Paragraph 2
+
+Paragraph 3
+
+Chunk 2
+
+Paragraph 3
+
+Paragraph 4
+
+Paragraph 5
+
+This preserves context across chunk boundaries.
+
+---
+
+## 8. Chunk Metadata
+
+Every chunk contains metadata including:
+
+* Chunk ID
+* Document ID
+* Chunk Index
+* Token Count
+* Character Start
+* Character End
+* Creation Timestamp
+
+This metadata simplifies indexing and retrieval.
+
+---
+
+# Algorithms Used in HAC
+
+Current implementation:
+
+* Greedy Algorithm
+* Sliding Window
+* Two Pointer (planned optimization)
+
+Future improvements may include:
+
+* Adaptive chunk sizing
+* Semantic boundary detection
+* Dynamic overlap adjustment
+* Heading-aware chunk construction
+* Table-aware chunk construction
+* Code block preservation
+
+---
+
+# Benefits of HAC
+
+* Preserves document structure
+* Produces cleaner chunks
+* Reduces context fragmentation
+* Improves retrieval accuracy
+* Scales to enterprise documents
+* Supports future intelligent chunking strategies
+
+---
+
+# HARE (Helix Adaptive Retrieval Engine)
+
+## Overview
+
+Helix Adaptive Retrieval Engine (HARE) is Cognexa's intelligent retrieval engine.
+
+Its responsibility is to retrieve the most relevant document chunks for a user's query before passing them to the Large Language Model.
+
+HARE acts as the reasoning bridge between the user's question and the knowledge stored in Cognexa.
+
+---
+
+# Why HARE Exists
+
+Large Language Models cannot search millions of document chunks efficiently.
+
+HARE identifies the most relevant information before inference.
+
+Instead of searching every chunk manually, HARE performs intelligent retrieval.
+
+---
+
+# HARE Pipeline
+
+User Question
+
+↓
+
+Query Cleaning
+
+↓
+
+Query Understanding
+
+↓
+
+Embedding Generation
+
+↓
+
+Vector Search
+
+↓
+
+Candidate Retrieval
+
+↓
+
+Metadata Filtering
+
+↓
+
+Re-ranking
+
+↓
+
+Context Assembly
+
+↓
+
+LLM Prompt Construction
+
+↓
+
+LLM Response
+
+---
+
+# HARE Components
+
+## 1. Query Processing
+
+Normalizes the user query.
+
+Examples:
+
+* Remove unnecessary whitespace
+* Normalize formatting
+* Prepare for embedding generation
+
+---
+
+## 2. Query Embedding
+
+The processed query is converted into a vector representation.
+
+This enables semantic comparison with stored document chunks.
+
+---
+
+## 3. Vector Search
+
+The query vector is compared against chunk embeddings stored in the vector database.
+
+Nearest-neighbor search identifies the most relevant candidates.
+
+---
+
+## 4. Metadata Filtering
+
+Additional filtering may include:
+
+* Project ID
+* Document Type
+* Upload Date
+* Department
+* Tags
+* User Permissions
+
+This improves retrieval precision.
+
+---
+
+## 5. Re-ranking
+
+Candidate chunks are reordered using additional scoring methods.
+
+Possible future ranking signals include:
+
+* Semantic similarity
+* Keyword overlap
+* Document authority
+* Chunk quality
+* Freshness
+
+---
+
+## 6. Context Assembly
+
+Selected chunks are merged into a structured context.
+
+Duplicate information is minimized.
+
+Relevant ordering is preserved.
+
+---
+
+## 7. Prompt Construction
+
+The final context is inserted into the system prompt together with:
+
+* User question
+* Instructions
+* Agent role
+* Tool outputs
+
+The Large Language Model receives only the most relevant knowledge.
+
+---
+
+# Algorithms Used in HARE
+
+Current roadmap:
+
+* Vector Similarity Search
+* Metadata Filtering
+* Greedy Context Assembly
+
+Future improvements:
+
+* Binary Search (where applicable on ordered indexes)
+* Priority Queue
+* Hash Maps
+* Graph-based Retrieval
+* Multi-stage Re-ranking
+* Hybrid Retrieval
+* Knowledge Graph Navigation
+
+---
+
+# Benefits of HARE
+
+* Faster retrieval
+* Better context selection
+* Lower hallucination rate
+* Reduced inference cost
+* Better enterprise scalability
+* Improved answer relevance
+
+---
+
+# HAC + HARE Together
+
+Document Upload
+
+↓
+
+HAC
+
+↓
+
+Logical Chunks
+
+↓
+
+Embeddings
+
+↓
+
+Vector Database
+
+↓
+
+User Query
+
+↓
+
+HARE
+
+↓
+
+Relevant Chunks
+
+↓
+
+Prompt Builder
+
+↓
+
+Large Language Model
+
+↓
+
+Final Answer
+
+---
+
+# Vision
+
+HAC and HARE together form the document intelligence foundation of Cognexa.
+
+HAC focuses on preserving document structure during ingestion.
+
+HARE focuses on retrieving the most relevant knowledge during inference.
+
+Together they create a modular, scalable architecture that supports enterprise Retrieval-Augmented Generation workflows and can evolve with future research and product development.

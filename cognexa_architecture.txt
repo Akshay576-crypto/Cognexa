@@ -1,0 +1,19 @@
+                         Cognexa
+                            │
+                      LangGraph
+                            │
+                 ┌──────────┴──────────┐
+                 ↓                     ↓
+          Research Agent        Consulting Agent
+                 │                     │
+          Research Prompt       Consulting Prompt
+                 │                     │
+                 └──────────┬──────────┘
+                            ↓
+                         HARE
+                            ↓
+                       Context
+                            ↓
+                        LangChain
+                            ↓
+                          LLM
