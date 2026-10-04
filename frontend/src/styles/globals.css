@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import "./theme.css";
+@import "./animations.css";
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: var(--cx-bg);
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at 20% 20%,
+            rgba(139, 92, 246, 0.08),
+            transparent 35%),
+        radial-gradient(circle at 80% 70%,
+            rgba(34, 211, 238, 0.05),
+            transparent 35%),
+        var(--cx-bg);
+
+    color: var(--cx-text-primary);
+    font-family: var(--cx-font-sans);
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+::selection {
+    background: rgba(139, 92, 246, 0.35);
+    color: white;
+}
+
+/* ================================
+   SCROLLBAR
+   ================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cx-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: var(--cx-radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ================================
+   GLOBAL GLASS
+   ================================ */
+
+.cx-glass {
+    background: var(--cx-glass-bg);
+    border: 1px solid var(--cx-glass-border);
+    backdrop-filter: blur(var(--cx-glass-blur));
+    -webkit-backdrop-filter: blur(var(--cx-glass-blur));
+    box-shadow: var(--cx-shadow-soft);
+}

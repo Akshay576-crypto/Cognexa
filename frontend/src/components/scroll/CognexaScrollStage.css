@@ -1,0 +1,294 @@
+.cognexa-scroll-stage {
+    position: relative;
+    height: 500vh;
+    background: #08090c;
+}
+
+.cognexa-scroll-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 650px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    isolation: isolate;
+}
+
+/* Ambient environment */
+
+.scroll-orb {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 999px;
+    filter: blur(150px);
+    pointer-events: none;
+    z-index: -2;
+}
+
+.scroll-orb-violet {
+    left: -180px;
+    top: 15%;
+    background: rgba(167, 139, 250, 0.06);
+}
+
+.scroll-orb-cyan {
+    right: -180px;
+    bottom: 10%;
+    background: rgba(103, 232, 249, 0.045);
+}
+
+/* Header */
+
+.scroll-stage-label {
+    position: absolute;
+    top: 34px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 0.28em;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+}
+
+/* Central C */
+
+.scroll-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 170px;
+    height: 170px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.018);
+    backdrop-filter: blur(25px);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.1),
+        0 0 90px rgba(167, 139, 250, 0.06);
+    z-index: 5;
+}
+
+.scroll-core-ring {
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    border: 1px solid rgba(167, 139, 250, 0.08);
+}
+
+.scroll-core-letter {
+    font-size: 68px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.08em;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.scroll-core-caption {
+    margin-top: 8px;
+    font-size: 7px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* Card area */
+
+.scroll-layer-space {
+    position: relative;
+    width: 430px;
+    height: 290px;
+    transform-style: preserve-3d;
+    z-index: 10;
+}
+
+/* Cards */
+
+.scroll-layer-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 430px;
+    height: 290px;
+    padding: 26px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(28px);
+    transform-origin: center center;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.09),
+        0 30px 80px rgba(0, 0, 0, 0.28);
+    transition:
+        border-color 350ms ease,
+        box-shadow 350ms ease;
+}
+
+.scroll-layer-card.is-active {
+    border-color: rgba(167, 139, 250, 0.22);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 30px 100px rgba(0, 0, 0, 0.35),
+        0 0 80px rgba(167, 139, 250, 0.06);
+}
+
+/* Reflection */
+
+.scroll-card-reflection {
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+}
+
+/* Card header */
+
+.scroll-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.scroll-card-status {
+    color: rgba(167, 139, 250, 0.5);
+}
+
+/* Card content */
+
+.scroll-card-content {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    bottom: 52px;
+}
+
+.scroll-card-content p {
+    margin: 0 0 9px;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+}
+
+.scroll-card-content h2 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.055em;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.scroll-card-content span {
+    display: block;
+    max-width: 320px;
+    margin-top: 14px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.28);
+}
+
+/* Bottom line */
+
+.scroll-card-line {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    bottom: 26px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Progress */
+
+.scroll-progress {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.scroll-progress span {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    transition:
+        height 300ms ease,
+        background 300ms ease;
+}
+
+.scroll-progress span.active {
+    height: 18px;
+    background: rgba(167, 139, 250, 0.7);
+}
+
+/* Scroll hint */
+
+.scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.16);
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+    .scroll-stage-label {
+        left: 20px;
+        right: 20px;
+    }
+
+    .scroll-layer-space {
+        width: min(82vw, 360px);
+    }
+
+    .scroll-layer-card {
+        width: min(82vw, 360px);
+    }
+
+    .scroll-card-content h2 {
+        font-size: 34px;
+    }
+
+    .scroll-core {
+        width: 130px;
+        height: 130px;
+    }
+
+    .scroll-core-letter {
+        font-size: 52px;
+    }
+
+    .scroll-progress {
+        right: 18px;
+    }
+}
