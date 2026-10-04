@@ -1,0 +1,69 @@
+/* ================================
+   COGNEXA MOTION SYSTEM
+   ================================ */
+
+@keyframes cx-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes cx-pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes cx-glow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgba(139, 92, 246, 0.08);
+    }
+
+    50% {
+        box-shadow:
+            0 0 50px rgba(139, 92, 246, 0.2);
+    }
+}
+
+.cx-float {
+    animation: cx-float 5s ease-in-out infinite;
+}
+
+.cx-pulse {
+    animation: cx-pulse 3s ease-in-out infinite;
+}
+
+.cx-glow {
+    animation: cx-glow 4s ease-in-out infinite;
+}
+
+/* Respect accessibility preferences */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
