@@ -1,0 +1,2 @@
+timestamp,cpu_percent,ram_percent,ram_used_mb,ram_available_mb,cycle_duration_seconds
+2026-11-18T07:53:19.141103+00:00,18.2,96.2,15416.52,607.99,33.66

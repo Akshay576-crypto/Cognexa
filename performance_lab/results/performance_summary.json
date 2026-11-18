@@ -1,0 +1,50 @@
+{
+    "Python": {
+        "samples": 2,
+        "passed": 2,
+        "failed": 0,
+        "average_latency_ms": 0.01,
+        "p95_latency_ms": 0.01,
+        "max_latency_ms": 0.01
+    },
+    "Ollama API": {
+        "samples": 2,
+        "passed": 2,
+        "failed": 0,
+        "average_latency_ms": 2135.95,
+        "p95_latency_ms": 2143.64,
+        "max_latency_ms": 2143.64
+    },
+    "Qdrant API": {
+        "samples": 2,
+        "passed": 2,
+        "failed": 0,
+        "average_latency_ms": 22.81,
+        "p95_latency_ms": 31.65,
+        "max_latency_ms": 31.65
+    },
+    "Embedding Model": {
+        "samples": 2,
+        "passed": 2,
+        "failed": 0,
+        "average_latency_ms": 7120.59,
+        "p95_latency_ms": 7495.06,
+        "max_latency_ms": 7495.06
+    },
+    "LLM Model": {
+        "samples": 2,
+        "passed": 2,
+        "failed": 0,
+        "average_latency_ms": 11890.03,
+        "p95_latency_ms": 19277.63,
+        "max_latency_ms": 19277.63
+    },
+    "Vector Retrieval": {
+        "samples": 2,
+        "passed": 2,
+        "failed": 0,
+        "average_latency_ms": 4369.93,
+        "p95_latency_ms": 4989.2,
+        "max_latency_ms": 4989.2
+    }
+}

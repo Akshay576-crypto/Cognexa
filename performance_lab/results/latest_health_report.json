@@ -1,0 +1,56 @@
+{
+    "timestamp": "2026-11-18T07:53:19.141103+00:00",
+    "python_version": "3.13.5",
+    "system": "Windows-11-10.0.26200-SP0",
+    "cycle_duration_seconds": 33.66,
+    "metrics": {
+        "cpu_percent": 18.2,
+        "ram_percent": 96.2,
+        "ram_used_mb": 15416.52,
+        "ram_available_mb": 607.99
+    },
+    "checks": [
+        {
+            "component": "Python",
+            "status": "PASS",
+            "latency_ms": 0.01,
+            "details": "3.13.5",
+            "error": null
+        },
+        {
+            "component": "Ollama API",
+            "status": "PASS",
+            "latency_ms": 2128.26,
+            "details": "Available models: ['nomic-embed-text:latest', 'gemma3:4b', 'qwen2.5:7b']",
+            "error": null
+        },
+        {
+            "component": "Qdrant API",
+            "status": "PASS",
+            "latency_ms": 13.98,
+            "details": "Collections: ['document_chunks', 'rag_documents']",
+            "error": null
+        },
+        {
+            "component": "Embedding Model",
+            "status": "PASS",
+            "latency_ms": 6746.12,
+            "details": "Embedding dimensions: 768",
+            "error": null
+        },
+        {
+            "component": "LLM Model",
+            "status": "PASS",
+            "latency_ms": 19277.63,
+            "details": "HEALTH_CHECK_OK",
+            "error": null
+        },
+        {
+            "component": "Vector Retrieval",
+            "status": "PASS",
+            "latency_ms": 4989.2,
+            "details": "Retrieved 4 documents",
+            "error": null
+        }
+    ]
+}
