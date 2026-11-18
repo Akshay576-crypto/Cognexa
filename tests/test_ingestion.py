@@ -1,7 +1,7 @@
 
-from app.ingestion.loader import load_document
-from app.ingestion.cleaner import clean_documents
 from app.ingestion.chunker import split_documents
+from app.ingestion.cleaner import clean_documents
+from app.ingestion.loader import load_document
 
 file_path = "data/uploads/sample.pdf"
 

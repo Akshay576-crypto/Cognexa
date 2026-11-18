@@ -1,11 +1,10 @@
 import hashlib
 import uuid
 
-from qdrant_client import QdrantClient, models
 from langchain_qdrant import QdrantVectorStore
+from qdrant_client import QdrantClient, models
 
 from app.embeddings.embedder import get_embeddings
-
 
 QDRANT_URL = "http://localhost:6333"
 COLLECTION_NAME = "rag_documents"

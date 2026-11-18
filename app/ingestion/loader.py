@@ -1,10 +1,9 @@
 
 from pathlib import Path
 
+from docx import Document as DocxDocument
 from langchain_core.documents import Document
 from pypdf import PdfReader
-from docx import Document as DocxDocument
-
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 

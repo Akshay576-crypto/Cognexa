@@ -1,25 +1,20 @@
-
 from pathlib import Path
 
 import streamlit as st
 
-from app.ingestion.loader import load_document
-from app.ingestion.cleaner import clean_documents
 from app.ingestion.chunker import split_documents
-
-from app.vectorstore.qdrant_store import (
-    store_documents,
-    reset_collection,
-)
-
+from app.ingestion.cleaner import clean_documents
+from app.ingestion.loader import load_document
 from app.pipeline.rag_chain import ask_question
-
+from app.vectorstore.qdrant_store import (
+    reset_collection,
+    store_documents,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 UPLOAD_DIR = PROJECT_ROOT / "data" / "uploads"
 
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-
 
 st.set_page_config(
     page_title="Local RAG Assistant",
@@ -46,7 +41,6 @@ if st.button("Process Document", type="primary"):
 
         try:
             with st.spinner("Processing your document..."):
-
                 documents = load_document(str(file_path))
                 cleaned = clean_documents(documents)
                 chunks = split_documents(cleaned)
@@ -61,7 +55,8 @@ if st.button("Process Document", type="primary"):
                 f"Successfully indexed {len(chunks)} chunks!"
             )
 
-        except Exception as error:
+        # Streamlit UI boundary: surface errors from document and service layers.
+        except Exception as error:  # noqa: BLE001
             st.error(f"Document processing failed: {error}")
 
 
@@ -98,27 +93,28 @@ if st.session_state.get("indexed_document"):
         with st.chat_message("user"):
             st.markdown(question)
 
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant"), st.spinner(
+            "Searching and generating an answer..."
+        ):
 
-            with st.spinner("Searching and generating an answer..."):
+            try:
+                result = ask_question(question, top_k=4)
 
-                try:
-                    result = ask_question(question, top_k=4)
+                st.markdown(result["answer"])
 
-                    st.markdown(result["answer"])
+                if result["sources"]:
+                    st.caption("Sources:")
+                    for source in result["sources"]:
+                        st.write(
+                            f"- {source['source']} — Page {source['page']}"
+                        )
 
-                    if result["sources"]:
-                        st.caption("Sources:")
-                        for source in result["sources"]:
-                            st.write(
-                                f"- {source['source']} — Page {source['page']}"
-                            )
+                st.session_state["chat_history"].append({
+                    "role": "assistant",
+                    "content": result["answer"],
+                    "sources": result["sources"],
+                })
 
-                    st.session_state["chat_history"].append({
-                        "role": "assistant",
-                        "content": result["answer"],
-                        "sources": result["sources"],
-                    })
-
-                except Exception as error:
-                    st.error(f"Question processing failed: {error}")
+            # Streamlit UI boundary: surface retrieval and generation failures.
+            except Exception as error:  # noqa: BLE001
+                st.error(f"Question processing failed: {error}")

@@ -1,8 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 
-from app.vectorstore.qdrant_store import search_documents
 from app.generation.llm import get_chat_model
-
+from app.vectorstore.qdrant_store import search_documents
 
 PROMPT = ChatPromptTemplate.from_messages([
     (

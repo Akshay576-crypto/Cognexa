@@ -1,8 +1,7 @@
-from pathlib import Path
 
-from app.ingestion.loader import load_document
-from app.ingestion.cleaner import clean_documents
 from app.ingestion.chunker import split_documents
+from app.ingestion.cleaner import clean_documents
+from app.ingestion.loader import load_document
 
 # Put a sample PDF, DOCX or TXT inside data/uploads/
 
