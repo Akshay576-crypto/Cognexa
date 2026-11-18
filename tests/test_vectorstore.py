@@ -1,44 +1,93 @@
-from pathlib import Path
 
-from app.ingestion.loader import load_document
-from app.ingestion.cleaner import clean_documents
-from app.ingestion.chunker import split_documents
+import hashlib
+import uuid
+from types import SimpleNamespace
 
-from app.vectorstore.qdrant_store import (
-    store_documents,
-    search_documents,
-)
+import pytest
+
+from app.vectorstore import qdrant_store
 
 
-def test_embedding_and_qdrant_storage():
+class MockVectorStore:
+    def __init__(self):
+        self.added_documents = None
+        self.added_ids = None
+        self.search_query = None
+        self.search_k = None
 
-    file_path = Path("data/uploads/sample.pdf")
+    def add_documents(self, documents, ids):
+        self.added_documents = documents
+        self.added_ids = ids
 
-    assert file_path.exists(), "Sample PDF not found."
+    def similarity_search(self, query, k):
+        self.search_query = query
+        self.search_k = k
+        return [
+            SimpleNamespace(
+                page_content="Retrieved document content.",
+                metadata={"source": "sample.pdf", "page": 1},
+            )
+        ]
 
-    documents = load_document(str(file_path))
-    cleaned = clean_documents(documents)
-    chunks = split_documents(cleaned)
 
-    vector_store = store_documents(chunks)
+def test_store_documents(monkeypatch):
+    documents = [
+        SimpleNamespace(
+            page_content="Sample document content.",
+            metadata={
+                "source": "sample.pdf",
+                "page": 1,
+                "chunk_id": 0,
+            },
+        )
+    ]
 
-    assert vector_store is not None
+    mock_store = MockVectorStore()
 
-    results = search_documents(
-        "What is the main objective of this document?",
-        top_k=4,
+    monkeypatch.setattr(
+        qdrant_store,
+        "get_vector_store",
+        lambda: mock_store,
     )
 
-    assert len(results) > 0
+    result = qdrant_store.store_documents(documents)
 
-    print("\n===== QDRANT RETRIEVAL TEST =====")
+    assert result is mock_store
+    assert mock_store.added_documents == documents
+    assert len(mock_store.added_ids) == 1
 
-    for result in results:
-        print("\nSource:", result.metadata.get("source"))
-        print("Page:", result.metadata.get("page"))
-        print("Content:", result.page_content[:250])
+    identity = "sample.pdf:1:0:Sample document content."
+    digest = hashlib.sha256(identity.encode("utf-8")).hexdigest()
+    expected_id = str(uuid.UUID(digest[:32]))
 
-    print("\nEMBEDDING AND QDRANT TEST PASSED")
+    assert mock_store.added_ids[0] == expected_id
 
-if __name__ == "__main__":
-    test_embedding_and_qdrant_storage()
+
+def test_store_documents_empty_input():
+    with pytest.raises(ValueError, match="No documents provided"):
+        qdrant_store.store_documents([])
+
+
+def test_search_documents(monkeypatch):
+    mock_store = MockVectorStore()
+
+    monkeypatch.setattr(
+        qdrant_store,
+        "get_vector_store",
+        lambda: mock_store,
+    )
+
+    results = qdrant_store.search_documents(
+        "What is in the document?",
+        top_k=5,
+    )
+
+    assert len(results) == 1
+    assert results[0].page_content == "Retrieved document content."
+    assert mock_store.search_query == "What is in the document?"
+    assert mock_store.search_k == 5
+
+
+def test_search_documents_empty_question():
+    with pytest.raises(ValueError, match="Question cannot be empty"):
+        qdrant_store.search_documents("   ")
