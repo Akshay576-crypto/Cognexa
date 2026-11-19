@@ -84,3 +84,6 @@ desktop.ini
 # Local runtime data
 .qdrant/
 chroma_db/
+
+# Local RAG documents and runtime data
+/data/
